@@ -201,9 +201,9 @@ export default function StudentDashboard({ user, onLogout }) {
                     <tbody>
                       {grades.length ? grades.map((g,i) => (
                         <tr key={i} style={i%2===0?{}:{background:'#f8f8ff'}}>
-                          <td style={s.td}><b>{g.subject?.code}</b></td>
-                          <td style={s.td}>{g.subject?.name}</td>
-                          <td style={{...s.td,textAlign:'center'}}>{g.subject?.units}</td>
+                          <td style={s.td}><b>{g.code}</b></td>
+                          <td style={s.td}>{g.name}</td>
+                          <td style={{...s.td,textAlign:'center'}}>{g.units}</td>
                           <td style={{...s.td,textAlign:'center'}}>{g.midtermGrade ?? '—'}</td>
                           <td style={{...s.td,textAlign:'center'}}>{g.finalGrade ?? '—'}</td>
                           <td style={{...s.td,textAlign:'center'}}>
