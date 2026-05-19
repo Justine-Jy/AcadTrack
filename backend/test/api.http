@@ -1,0 +1,29 @@
+@BACKEND_PORT=http://localhost:5000/api
+
+###
+POST {{BACKEND_PORT}}/add-user
+Content-Type: application/json
+
+{
+    "fullname": "Emily White",
+    "username": "emily_willis",
+    "password": "pogiako123"
+}
+
+###
+GET {{BACKEND_PORT}}/users-add
+Content-Type: application/json
+
+
+###
+PUT {{BACKEND_PORT}}/edit-user/1
+Content-Type: application/json
+
+{
+    "fullname": "Joebert Marquez",
+    "username": "joebert_marquez",
+    "password": "lokomoko"
+}
+
+###
+DELETE {{BACKEND_PORT}}/delete-user/2
