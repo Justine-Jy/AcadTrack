@@ -24,13 +24,13 @@ const getAdminDashboard = asyncHandler(async (req, res) => {
   );
 
   const [subjectEnrollmentCounts] = await connection.query(
-    `SELECT s.id, s.name, s.code, COUNT(e.id) as count
-     FROM subjects s
-     LEFT JOIN enrollments e ON s.id = e.subjectId AND e.status = "enrolled"
-     GROUP BY s.id, s.name, s.code
-     ORDER BY count DESC
-     LIMIT 5`
-  );
+  `SELECT s.id, s.name, s.code, COUNT(e.id) as count
+   FROM subjects s
+   LEFT JOIN enrollments e ON s.id = e.subject AND e.status = "enrolled"
+   GROUP BY s.id, s.name, s.code
+   ORDER BY count DESC
+   LIMIT 5`
+);
 
   res.json({
     success: true,
@@ -59,7 +59,7 @@ const getEnrollmentReport = asyncHandler(async (req, res) => {
            SUM(CASE WHEN e.status = 'dropped' THEN 1 ELSE 0 END) as droppedCount,
            SUM(CASE WHEN e.status = 'completed' THEN 1 ELSE 0 END) as completedCount
     FROM subjects s
-    LEFT JOIN enrollments e ON s.id = e.subjectId
+    LEFT JOIN enrollments e ON s.id = e.subject
   `;
   const params = [];
 
@@ -91,7 +91,7 @@ const getGradesReport = asyncHandler(async (req, res) => {
            SUM(CASE WHEN g.grade <= 3.0 THEN 1 ELSE 0 END) as passCount,
            SUM(CASE WHEN g.grade > 3.0 THEN 1 ELSE 0 END) as failCount
     FROM subjects s
-    LEFT JOIN grades g ON s.id = g.subjectId AND g.grade IS NOT NULL
+    LEFT JOIN grades g ON s.id = g.subject AND g.grade IS NOT NULL
   `;
   const params = [];
 
