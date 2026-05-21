@@ -8,11 +8,13 @@ const {
   createUser,
   updateUser,
   changeUserRole,
+  getFacultyList,
 } = require('../controllers/adminController');
 
 router.use(protect, authorize('admin'));
 
 router.get('/dashboard',          getAdminDashboard);
+router.get('/faculty',            getFacultyList);
 router.get('/reports/enrollment', getEnrollmentReport);
 router.get('/reports/grades',     getGradesReport);
 router.post('/users',             createUser);

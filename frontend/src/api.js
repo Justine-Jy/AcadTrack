@@ -82,4 +82,9 @@ export const api = {
   updateNotificationPrefs: (data) => apiClient('/settings/notifications', { method: 'PUT', body: JSON.stringify(data) }),
   getThemePrefs: () => apiClient('/settings/theme'),
   updateThemePrefs: (data) => apiClient('/settings/theme', { method: 'PUT', body: JSON.stringify(data) }),
+
+  getFacultyList: () => apiClient('/admin/faculty'),
+
+  getSubjectGrades: (subjectId) => apiClient(`/grades/subject/${subjectId}`),
+  postGrade: (id, data) => apiClient(`/grades/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
 };

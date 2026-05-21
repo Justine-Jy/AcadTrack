@@ -219,6 +219,17 @@ const changeUserRole = asyncHandler(async (req, res) => {
   if (user.length === 0) throw new AppError('User not found', 404);
 
   res.json({ success: true, data: user[0] });
+  
+});
+
+// GET /api/admin/faculty
+const getFacultyList = asyncHandler(async (req, res) => {
+  const connection = await connectDB();
+  const [faculty] = await connection.query(
+    `SELECT id, studentId, firstName, lastName, email, isActive, createdAt
+     FROM users WHERE role = 'faculty' ORDER BY firstName`
+  );
+  res.json({ success: true, count: faculty.length, data: faculty });
 });
 
 module.exports = {
@@ -228,4 +239,5 @@ module.exports = {
   createUser,
   updateUser,
   changeUserRole,
+  getFacultyList,
 };
